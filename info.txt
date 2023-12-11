@@ -1,0 +1,53 @@
+PS C:\Users\APP DISTRIBUIDAS\Desktop\PracticaDocker> docker build -t imagenser1 ./server1
+[+] Building 6.0s (9/9) FINISHED                                                                                                                                                                                  docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                                        1.0s
+ => => transferring dockerfile: 415B                                                                                                                                                                                        0.0s
+ => [internal] load .dockerignore                                                                                                                                                                                           1.2s
+ => => transferring context: 2B                                                                                                                                                                                             0.0s
+ => [internal] load metadata for docker.io/library/python:3.9                                                                                                                                                               2.7s
+ => [1/4] FROM docker.io/library/python:3.9@sha256:b2e47a7eca3178e4ce6c095d3a2d1cd05bfa616efe7f2047c95fffe159e00166                                                                                                         0.0s
+ => [internal] load build context                                                                                                                                                                                           0.7s
+ => => transferring context: 640B                                                                                                                                                                                           0.0s
+ => CACHED [2/4] WORKDIR /servidor                                                                                                                                                                                          0.0s
+ => CACHED [3/4] COPY . .                                                                                                                                                                                                   0.0s
+ => CACHED [4/4] RUN pip install flask                                                                                                                                                                                      0.0s
+ => exporting to image                                                                                                                                                                                                      0.2s 
+ => => exporting layers                                                                                                                                                                                                     0.0s 
+ => => writing image sha256:b36e815b59e47ae98684edf38af189d6ba1fa72e3d92ceb193742ca738aa5770                                                                                                                                0.1s 
+ => => naming to docker.io/library/imagenser1                                                                                                                                                                               0.1s 
+
+What's Next?
+  1. Sign in to your Docker account → docker login
+  2. View a summary of image vulnerabilities and recommendations → docker scout quickview
+PS C:\Users\APP DISTRIBUIDAS\Desktop\PracticaDocker> docker build -t imagenser2 ./server2
+[+] Building 14.0s (9/9) FINISHED                                                                                                                                                                                 docker:default
+ => [internal] load .dockerignore                                                                                                                                                                                           0.8s
+ => => transferring context: 2B                                                                                                                                                                                             0.0s 
+ => [internal] load build definition from Dockerfile                                                                                                                                                                        1.1s
+ => => transferring dockerfile: 415B                                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/python:3.9                                                                                                                                                               1.2s
+ => [1/4] FROM docker.io/library/python:3.9@sha256:b2e47a7eca3178e4ce6c095d3a2d1cd05bfa616efe7f2047c95fffe159e00166                                                                                                         0.0s
+ => [internal] load build context                                                                                                                                                                                           0.5s 
+ => => transferring context: 653B                                                                                                                                                                                           0.0s
+ => CACHED [2/4] WORKDIR /servidor                                                                                                                                                                                          0.0s
+ => [3/4] COPY . .                                                                                                                                                                                                          0.7s 
+ => [4/4] RUN pip install flask                                                                                                                                                                                             7.6s
+ => exporting to image                                                                                                                                                                                                      1.3s 
+ => => exporting layers                                                                                                                                                                                                     1.1s 
+ => => writing image sha256:650abd0f4118a721f51e670f25d6cb7905bfe57d7549146da72ec5eae34f87bc                                                                                                                                0.0s 
+ => => naming to docker.io/library/imagenser2                                                                                                                                                                               0.1s 
+
+What's Next?
+  1. Sign in to your Docker account → docker login
+  2. View a summary of image vulnerabilities and recommendations → docker scout quickview
+PS C:\Users\APP DISTRIBUIDAS\Desktop\PracticaDocker> docker run -d -p 5003:5000 imagenser1
+8a424e14385cfb6ac7dca389b712ef3931e941acf1f07e0d799af99d27bd6858
+PS C:\Users\APP DISTRIBUIDAS\Desktop\PracticaDocker> docker run -d -p 5003:5001 imagenser2
+00f5bb3686834e4a234fd91e501c0185bcb2208b3d5f412058b62f19e4f2c150
+docker: Error response from daemon: driver failed programming external connectivity on endpoint silly_fermi (f32e172ef87da32130d742cf12a3a3b445e01d347500cdc127f2542623600f1e): Bind for 0.0.0.0:5003 failed: port is already allocated.
+PS C:\Users\APP DISTRIBUIDAS\Desktop\PracticaDocker> docker run -d -p 5003:5002 imagenser2
+53c852e7236ce4f8964ab807bf493ca31c61f3cc44f39049f175e05a61d77e23
+docker: Error response from daemon: driver failed programming external connectivity on endpoint vigilant_sammet (0eeaad39f7709f80d8c26d08e5a05bba324af43f44540dd295ac939ea14e46c9): Bind for 0.0.0.0:5003 failed: port is already allocated.
+PS C:\Users\APP DISTRIBUIDAS\Desktop\PracticaDocker> docker run -d -p 5004:5002 imagenser2
+5add3a1e1e4be9ab95157f4a0e9991a90dfc75bfa137db477dafcd6c4d5c7b70
+PS C:\Users\APP DISTRIBUIDAS\Desktop\PracticaDocker> 
